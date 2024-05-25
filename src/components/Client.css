@@ -1,0 +1,63 @@
+
+.card {
+    padding: 8px;
+    border-radius: 10px;
+    background: rgba(var(--card-rgb), 0);
+    border: 1px solid black;
+    transition: background 200ms, border 200ms;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  button.active {
+    background-color: red;
+    color: white;
+  }
+  
+  .card h2 {
+    font-weight: 600;
+    margin-bottom: 0.7rem;
+  }
+  
+  .card p {
+    margin: 0;
+    opacity: 0.6;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    max-width: 30ch;
+  }
+  
+.client-page {
+  background: linear-gradient(#e3bbbb,#811717);
+  box-shadow: 10px 10px 10px rgb(1, 2, 11);
+  border-radius: 10px;
+
+}
+.client-page h1 {
+  text-align: center;
+
+}
+
+.client-details {
+  list-style: none;
+  
+}
+
+.client-details li {
+  color: #480e0e;
+  padding: 5px;
+  
+}
+
+.client-page button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  transition: color 1sec;
+}
+
+.client-page button:hover {
+  color: green;
+}

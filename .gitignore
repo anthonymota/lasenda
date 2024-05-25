@@ -5,6 +5,8 @@
 /.pnp
 .pnp.js
 
+#sensitive data
+src/data
 # testing
 /coverage
 
