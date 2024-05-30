@@ -42,6 +42,7 @@ function App() {
           />
         ) : (
           <div>
+            
             <Search OnInput={handleInput} searchvalue={clientSearch} />
             <ClientList
               onClick={handleClick}
