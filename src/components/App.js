@@ -11,7 +11,6 @@ function App() {
   const [clientSearch, setclientSearch] = useState('');
   const [activeClient, setactiveClient] = useState(null);
 
-
   function handleInput(e) {
     setclientSearch(e.target.value);
   }
@@ -21,7 +20,7 @@ function App() {
       setactiveClient(null);
     } else setactiveClient(clientid);
   }
-
+  console.log('hello');
   const result = clientslist.filter((client) => {
     return (
       client['1stInsured'].toLowerCase().includes(clientSearch) ||
@@ -29,7 +28,6 @@ function App() {
       client['Ins/Bus'].toLowerCase().includes(clientSearch)
     );
   });
-
 
   return (
     <Layout>
