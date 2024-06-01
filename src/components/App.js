@@ -7,6 +7,7 @@ import clients from '../data/clients.json';
 import { useState } from 'react';
 const clientslist = clients.clients;
 
+
 function App() {
   const [clientSearch, setclientSearch] = useState('');
   const [activeClient, setactiveClient] = useState(null);
@@ -20,7 +21,7 @@ function App() {
       setactiveClient(null);
     } else setactiveClient(clientid);
   }
-  console.log('hello');
+
   const result = clientslist.filter((client) => {
     return (
       client['1stInsured'].toLowerCase().includes(clientSearch) ||
