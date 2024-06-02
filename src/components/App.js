@@ -4,16 +4,27 @@ import Search from './Search';
 import ClientList from './ClientList';
 import Client from './Client';
 import clients from '../data/clients.json';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 const clientslist = clients.clients;
-
 
 function App() {
   const [clientSearch, setclientSearch] = useState('');
   const [activeClient, setactiveClient] = useState(null);
+  const [clientsList, setClientsList] = useState([]);
+
+
+  useEffect(() => {
+    fetch('http://localhost:3000')
+      .then((res) => {
+        return res.json();
+      })
+      .then((resData) => {
+        setClientsList(resData.clients.clients);
+      });
+  }, []);
 
   function handleInput(e) {
-    setclientSearch(e.target.value);
+    setclientList(e.target.value);
   }
 
   function handleClick(clientid) {
@@ -35,17 +46,14 @@ function App() {
       <div>
         {activeClient | (activeClient === 0) ? (
           <Client
-            client={clientslist[activeClient]}
+            client={clientsList[activeClient]}
             activeclient={activeClient}
             goBack={handleClick}
           />
         ) : (
           <div>
             <Search OnInput={handleInput} searchvalue={clientSearch} />
-            <ClientList
-              onClick={handleClick}
-              clients={clientSearch ? result : clientslist}
-            />
+            <ClientList onClick={handleClick} clients={clientsList} />
           </div>
         )}
       </div>
