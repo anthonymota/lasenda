@@ -1,5 +1,4 @@
 import Layout from './Layout';
-import RandomClient from './RandomClient';
 import Search from './Search';
 import ClientList from './ClientList';
 import Client from './Client';
@@ -20,14 +19,6 @@ function App() {
       setactiveClient(null);
     } else setactiveClient(clientid);
   }
-  console.log('hello');
-  const result = clientslist.filter((client) => {
-    return (
-      client['1stInsured'].toLowerCase().includes(clientSearch) ||
-      client.Business.toLowerCase().includes(clientSearch) ||
-      client['Ins/Bus'].toLowerCase().includes(clientSearch)
-    );
-  });
 
   return (
     <Layout>
