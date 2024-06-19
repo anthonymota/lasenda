@@ -14,6 +14,16 @@
     background-color: red;
     color: white;
   }
+  .card a {
+    text-decoration: none;
+    color: black;
+
+  }
+  .card a:hover,
+  .card a:active {
+    color: green;
+    text-decoration: underline ;
+  }
   
   .card h2 {
     font-weight: 600;
@@ -61,3 +71,4 @@
 .client-page button:hover {
   color: green;
 }
+

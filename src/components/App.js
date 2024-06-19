@@ -14,16 +14,13 @@ function App() {
     setclientSearch(e.target.value);
   }
 
-  function handleClick() {
-
-  }
   console.log(clientslist);
   return (
     <Layout>
       <div>
         <div>
           <Search OnInput={handleInput} searchvalue={clientSearch} />
-          <ClientList onClick={handleClick} clients={clientslist} />
+          <ClientList  clients={clientslist} />
         </div>
       </div>
     </Layout>

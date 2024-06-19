@@ -1,11 +1,11 @@
 import Client from './Client';
 import './ClientList.css';
 
-export default function Test({ clients, onClick }) {
+export default function ClientList({ clients }) {
   return (
     <div className='clients'>
       {clients.map((c) => (
-        <Client key={c['#']} client={c} onClick={onClick} />
+        <Client key={c['#']} client={c} />
       ))}
     </div>
   );

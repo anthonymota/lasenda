@@ -1,10 +1,13 @@
+import { Link } from 'react-router-dom';
 import './Client.css';
 
-export default function Client({ onClick, client, goBack }) {
+export default function Client({ client, goBack }) {
   return (
-    <div onClick={(e) => onClick(client['#'] - 1)} className='card'>
+    <div className='card'>
       <h2>
-        {client['#']} {client['1stInsured']}
+        <Link to={`clients/5`}>
+          {client['#']} {client['1stInsured']}
+        </Link>
       </h2>
       <p>
         {client['1stInsured'] !== client['Ins/Bus']

@@ -1,8 +1,11 @@
+import { useParams } from 'react-router-dom';
 import './Client.css';
 
-export default function () {
+export default function ClientPage() {
+  const params = useParams();
   return (
     <div className='client-page'>
+      <h1>{params.clientId}</h1>
       <h1>{client['1stInsured']}</h1>
 
       <ul className='client-details'>
