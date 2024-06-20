@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/App';
 import ClientPage from './pages/ClientPage';
+import UserProfile from './pages/UserProfile';
 import ClientList, { loader as clientsLoader } from './pages/ClientList';
 import ClientsRootLayout from './pages/ClientsRootLayout';
 import NewClientPage from './pages/NewClientPage';
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
           { path: ':clientId/edit', element: <EditClientPage /> },
         ],
       },
+      { path: 'profile', element: <UserProfile /> },
     ],
   },
 ]);

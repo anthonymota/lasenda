@@ -1,10 +1,11 @@
 import { NavLink } from 'react-router-dom';
-import classes from './ClientsNavigation.css';
+import './ClientsNavigation.css';
+
 export default function ClientNavigation() {
   return (
     <header>
       <nav>
-        <ul>
+        <ul className='client-header'>
           <li>
             <NavLink
               to='/clients'

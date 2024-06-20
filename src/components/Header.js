@@ -1,11 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import company_image from '../images/la-senda-image.png';
-import classes from './Layout.css';
-
 export default function Header() {
   return (
-    <header>
+    <header className='main-header'>
       <nav>
         <ul>
           <li>
@@ -33,9 +31,16 @@ export default function Header() {
             <NavLink
               to='/clients/new'
               className={({ isActive }) => (isActive ? 'active' : '')}
-              end
             >
               New Client
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to='/profile'
+              className={({ isActive }) => (isActive ? 'active' : '')}
+            >
+              Profile
             </NavLink>
           </li>
         </ul>
