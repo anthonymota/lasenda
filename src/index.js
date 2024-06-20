@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/App';
-import ClientPage from './components/ClientPage';
-import ClientList from './components/ClientList';
-import NewClientPage from './components/NewClientPage';
-import EditClientPage from './components/EditClientPage';
+import ClientPage from './pages/ClientPage';
+import ClientList, { loader as clientsLoader } from './pages/ClientList';
+import ClientsRootLayout from './pages/ClientsRootLayout';
+import NewClientPage from './pages/NewClientPage';
+import EditClientPage from './pages/EditClientPage';
 import Layout from './components/Layout';
-import ErrorPage from './components/ErrorPage';
+import ErrorPage from './pages/ErrorPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
@@ -14,11 +15,21 @@ const router = createBrowserRouter([
     path: '/',
     element: <Layout />,
     children: [
-      { path: '/', element: <App />, errorElement: <ErrorPage /> },
-      { path: '/clients/:clientId', element: <ClientPage /> },
-      { path: '/clients/new', element: <NewClientPage /> },
-      { path: '/clients/:clientId/edit', element: <EditClientPage /> },
-      { path: '/clients', element: <ClientList /> },
+      { index: true, element: <App />, errorElement: <ErrorPage /> },
+      {
+        path: 'clients',
+        element: <ClientsRootLayout />,
+        children: [
+          {
+            index: true,
+            element: <ClientList />,
+            loader: clientsLoader,
+          },
+          { path: ':clientId', element: <ClientPage /> },
+          { path: 'new', element: <NewClientPage /> },
+          { path: ':clientId/edit', element: <EditClientPage /> },
+        ],
+      },
     ],
   },
 ]);

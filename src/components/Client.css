@@ -48,6 +48,10 @@
   text-align: center;
 
 }
+.client-page a {
+  color: black;
+  text-decoration: none;
+}
 
 .client-details {
   list-style: none;

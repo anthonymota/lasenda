@@ -5,8 +5,8 @@ export default function Client({ client, goBack }) {
   return (
     <div className='card'>
       <h2>
-        <Link to={`clients/5`}>
-          {client['#']} {client['1stInsured']}
+        <Link to={`/clients/${client['#']}`}>
+          {client['#']} {client['First'] + ' ' + client['Last']}
         </Link>
       </h2>
       <p>
