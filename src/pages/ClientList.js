@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Client from '../components/Client';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, json } from 'react-router-dom';
 import './ClientList.css';
 const dummydata = [
   {
@@ -510,7 +510,13 @@ const dummydata = [
 ];
 
 export default function ClientList() {
-  const clients = useLoaderData();
+  const data = useLoaderData();
+
+  if (data.isError) {
+    return <p>{data.message}</p>;
+  }
+  const clients = data.events;
+
   return (
     <div className='clients'>
       {clients.map((c) => (
@@ -524,9 +530,8 @@ export async function loader() {
   const response = await fetch('http://localhost:8080/events');
 
   if (!response.ok) {
-    //...
+    throw json({ message: 'Could not fetch clients.' }, { status: 500 });
   } else {
-    const resData = await response.json();
-    return resData.events;
+    return response;
   }
 }

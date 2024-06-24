@@ -1,22 +1,21 @@
 import { Link } from 'react-router-dom';
 import './Client.css';
 
-export default function Client({ client, goBack }) {
+export default function Client({ client }) {
   return (
-    <div className='card'>
-      <h2>
-        <Link to={`/clients/${client['#']}`}>
+    <Link to={`${client['#']}`}>
+      <div className='card'>
+        <h2>
           {client['#']} {client['First'] + ' ' + client['Last']}
-        </Link>
-      </h2>
-      <p>
-        {client['1stInsured'] !== client['Ins/Bus']
-          ? client['Ins/Bus']
-          : client.Business}
-      </p>
-      <p>{client['#']}</p>
-      <p>{client.CellPhone}</p>
-      <p>{client.NAICS}</p>
-    </div>
+        </h2>
+        <p>
+          {client['1stInsured'] !== client['Ins/Bus']
+            ? client['Ins/Bus']
+            : client.Business}
+        </p>
+        <p>{client['1stPhone']}</p>
+        <p>{client.NAICS}</p>
+      </div>
+    </Link>
   );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/App';
-import ClientPage from './pages/ClientPage';
+import ClientPage, { loader as clientDetailLoader } from './pages/ClientPage';
 import UserProfile from './pages/UserProfile';
 import ClientList, { loader as clientsLoader } from './pages/ClientList';
 import ClientsRootLayout from './pages/ClientsRootLayout';
@@ -15,8 +15,9 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
+    errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <App />, errorElement: <ErrorPage /> },
+      { index: true, element: <App /> },
       {
         path: 'clients',
         element: <ClientsRootLayout />,
@@ -26,9 +27,19 @@ const router = createBrowserRouter([
             element: <ClientList />,
             loader: clientsLoader,
           },
-          { path: ':clientId', element: <ClientPage /> },
+          {
+            path: ':clientId',
+            loader: clientDetailLoader,
+            id: 'client-detail',
+            children: [
+              {
+                index: true,
+                element: <ClientPage />,
+              },
+              { path: 'edit', element: <EditClientPage /> },
+            ],
+          },
           { path: 'new', element: <NewClientPage /> },
-          { path: ':clientId/edit', element: <EditClientPage /> },
         ],
       },
       { path: 'profile', element: <UserProfile /> },
