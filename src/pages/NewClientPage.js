@@ -1,3 +1,5 @@
+import ClientForm from '../components/ClientForm';
+
 export default function NewClientPage() {
-  return <div>NewClientPage</div>;
+  return <ClientForm method='post' />;
 }

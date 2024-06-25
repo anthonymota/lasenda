@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/App';
-import ClientPage, { loader as clientDetailLoader } from './pages/ClientPage';
+import ClientPage, {
+  loader as clientDetailLoader,
+  action as deleteClientAction,
+} from './pages/ClientPage';
 import UserProfile from './pages/UserProfile';
 import ClientList, { loader as clientsLoader } from './pages/ClientList';
 import ClientsRootLayout from './pages/ClientsRootLayout';
@@ -10,6 +13,7 @@ import EditClientPage from './pages/EditClientPage';
 import Layout from './components/Layout';
 import ErrorPage from './pages/ErrorPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { action as manipulateClientAction } from './components/ClientForm';
 
 const router = createBrowserRouter([
   {
@@ -35,11 +39,16 @@ const router = createBrowserRouter([
               {
                 index: true,
                 element: <ClientPage />,
+                action: deleteClientAction,
               },
-              { path: 'edit', element: <EditClientPage /> },
+              {
+                path: 'edit',
+                element: <EditClientPage />,
+                action: manipulateClientAction,
+              },
             ],
           },
-          { path: 'new', element: <NewClientPage /> },
+          { path: 'new', element: <NewClientPage />, action: manipulateClientAction },
         ],
       },
       { path: 'profile', element: <UserProfile /> },

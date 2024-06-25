@@ -1,13 +1,31 @@
-import { useParams, Link, useRouteLoaderData, json } from 'react-router-dom';
+import {
+  useParams,
+  Link,
+  useRouteLoaderData,
+  json,
+  redirect,
+  useSubmit,
+} from 'react-router-dom';
 import '../components/Client.css';
 
 export default function ClientPage() {
+  const submit = useSubmit();
   const data = useRouteLoaderData('client-detail');
   const client = data.event;
+
   console.log(client);
+
+  function startDeleteHandler() {
+    const proceed = window.confirm('Are you sure?');
+
+    if (proceed) {
+      submit(null, { method: 'delete' });
+    }
+  }
+
   return (
     <div className='client-page'>
-      <h1>{client['1stInsured']}</h1>
+      <h1>{client['First'] + ' ' + client.Last}</h1>
 
       <ul className='client-details'>
         <li>Customer ID: {client.CustID}</li>
@@ -26,7 +44,7 @@ export default function ClientPage() {
           Address: {client.Address + ','} {client.City}
         </li>
         <li>C-Producer: {client['C-Producer']}</li>
-        <li>FEIN: {client.Fein}</li>
+        <li>FEIN: {client['Fein #']}</li>
       </ul>
 
       <div className='card'>
@@ -34,13 +52,13 @@ export default function ClientPage() {
       </div>
 
       <Link to='edit'>Edit</Link>
+      <button onClick={startDeleteHandler}>Delete</button>
     </div>
   );
 }
 
 export async function loader({ request, params }) {
   const id = params.clientId;
-  console.log('id', id);
   const response = await fetch('http://localhost:8080/events/' + id);
 
   if (!response.ok) {
@@ -48,4 +66,17 @@ export async function loader({ request, params }) {
   } else {
     return response;
   }
+}
+
+export async function action({params, request}) { 
+  const clientID = params.clientId;
+  console.log('clientID', clientID);
+  const response = await fetch('http://localhost:8080/events/' + clientID, {
+    method: request.method,
+  });
+
+  if (!response.ok) {
+    throw json({ message: 'Could not delete client' }, { status: 500 });
+  }
+  return redirect('/clients');
 }
