@@ -111,7 +111,7 @@ export async function action({ request, params }) {
   const data = await request.formData();
 
   const clientData = {
-    ['#']: data.get('#'),
+    ['#']: Number(data.get('#')),
     First: data.get('first_name'),
     Last: data.get('last_name'),
     ['Ins/Bus']: data.get('business'),
@@ -122,6 +122,7 @@ export async function action({ request, params }) {
   };
 
   let url = 'http://localhost:8080/events';
+
   if (method === 'PATCH') {
     const clientId = params.clientId;
     url = 'http://localhost:8080/events/' + clientId;

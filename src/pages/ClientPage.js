@@ -1,6 +1,7 @@
 import {
   useParams,
   Link,
+  NavLink,
   useRouteLoaderData,
   json,
   redirect,
@@ -25,28 +26,47 @@ export default function ClientPage() {
 
   return (
     <div className='client-page'>
-      <h1>{client['First'] + ' ' + client.Last}</h1>
-
-      <ul className='client-details'>
+      <ul className='top-header'>
         <li>Customer ID: {client.CustID}</li>
-
-        <li>
-          Business:{' '}
-          {client['1stInsured'] !== client['Ins/Bus']
-            ? client['Ins/Bus']
-            : client.Business}
-          <button>Edit</button>
-        </li>
-        <li>NAICS: {client['NAICS']}</li>
-        <li>Emails: {client['1stEmail']}</li>
-        <li>1st Phone: {client['1stPhone']}</li>
-        <li>
-          Address: {client.Address + ','} {client.City}
-        </li>
-        <li>C-Producer: {client['C-Producer']}</li>
-        <li>FEIN: {client['Fein #']}</li>
       </ul>
-
+      <div className='client-page-details'>
+        <div className='left-column'>
+          <ul className='client-details'>
+            <li>
+              Corporation:{' '}
+              {client['1stInsured'] !== client['Ins/Bus']
+                ? client['Ins/Bus']
+                : client.Business}
+            </li>
+            <li>Contact 1: {' ' + client.Last + ', ' + client['First']}</li>
+            <li>
+              Mailing Address: {client.Address + ','} {client.City}
+            </li>
+          </ul>
+        </div>
+        <div className='right-column'>
+          <ul className='client-details'>
+            <li>Producer: {client['C-Producer']}</li>
+            <li>Cell Phone: {client['1stPhone']}</li>
+            <li>Work Email: {client['1stEmail']}</li>
+          </ul>
+        </div>
+      </div>
+      <nav>
+        <ul className='policies'>
+          <li>
+            <NavLink
+              to='bookkeeping'
+              className={({ isActive }) => (isActive ? 'active' : '')}
+              end
+            >
+              Bookkeeping
+            </NavLink>
+          </li>
+          <li>Corporation</li>
+          <li>Trucking</li>
+        </ul>
+      </nav>
       <div className='card'>
         <h2>Logs</h2>
       </div>
@@ -68,7 +88,7 @@ export async function loader({ request, params }) {
   }
 }
 
-export async function action({params, request}) { 
+export async function action({ params, request }) {
   const clientID = params.clientId;
   console.log('clientID', clientID);
   const response = await fetch('http://localhost:8080/events/' + clientID, {

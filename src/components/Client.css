@@ -34,27 +34,37 @@
     max-width: 30ch;
   }
   
-.client-page {
-  background: linear-gradient(#e3bbbb,#811717);
+.client-page{
   box-shadow: 10px 10px 10px rgb(1, 2, 11);
   border-radius: 10px;
 
 }
-.client-page h1 {
-  text-align: center;
 
+.policies {
+  display: flex;
+  gap: 20px;
+  background-color: rgb(23, 73, 197);
+  color: white;
+  font-family: 'Times New Roman', Times, serif;
+  height: 50px;
+  align-items: center;
 }
+
+.client-page-details {
+  display: flex;
+}
+
 .client-page a {
   color: black;
   text-decoration: none;
 }
 
-.client-details {
-  list-style: none;
-  
+.top-header {
+  background-color: rgb(220, 235, 255);
 }
 
 .client-details li {
+  list-style: none;
   color: #480e0e;
   padding: 5px;
   

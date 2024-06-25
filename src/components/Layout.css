@@ -35,3 +35,8 @@ header a.active {
       margin: 300px 0 40px;
       text-align: right;
   }
+
+
+.main-nav {
+  background-color: rgb(220, 235, 255);
+}

@@ -24,7 +24,7 @@ const router = createBrowserRouter([
       { index: true, element: <App /> },
       {
         path: 'clients',
-        element: <ClientsRootLayout />,
+
         children: [
           {
             index: true,
@@ -46,9 +46,14 @@ const router = createBrowserRouter([
                 element: <EditClientPage />,
                 action: manipulateClientAction,
               },
+              { path: 'bookkeeping' },
             ],
           },
-          { path: 'new', element: <NewClientPage />, action: manipulateClientAction },
+          {
+            path: 'new',
+            element: <NewClientPage />,
+            action: manipulateClientAction,
+          },
         ],
       },
       { path: 'profile', element: <UserProfile /> },

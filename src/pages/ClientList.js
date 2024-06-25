@@ -515,7 +515,7 @@ export default function ClientList() {
   if (data.isError) {
     return <p>{data.message}</p>;
   }
-  const clients = data.events;
+  const clients = data.events.sort((a, b) => a['#'] - b['#']);
 
   return (
     <div className='clients'>
