@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/App';
-import ClientPage, {
-  loader as clientDetailLoader,
-  action as deleteClientAction,
-} from './pages/ClientPage';
+import ClientPage, { loader as clientDetailLoader } from './pages/ClientPage';
 import UserProfile from './pages/UserProfile';
+import Bookkeeping from './pages/Bookkeeping';
+import Trucking from './pages/Trucking';
+import Corporation from './pages/Corporation';
 import ClientList, { loader as clientsLoader } from './pages/ClientList';
-import ClientsRootLayout from './pages/ClientsRootLayout';
+import ClientsRootLayout, {
+  action as deleteClientAction,
+} from './pages/ClientsRootLayout';
 import NewClientPage from './pages/NewClientPage';
 import EditClientPage from './pages/EditClientPage';
 import Layout from './components/Layout';
@@ -34,19 +36,22 @@ const router = createBrowserRouter([
           {
             path: ':clientId',
             loader: clientDetailLoader,
+            element: <ClientsRootLayout />,
+            action: deleteClientAction,
             id: 'client-detail',
             children: [
               {
                 index: true,
                 element: <ClientPage />,
-                action: deleteClientAction,
               },
               {
                 path: 'edit',
                 element: <EditClientPage />,
                 action: manipulateClientAction,
               },
-              { path: 'bookkeeping' },
+              { path: 'bookkeeping', element: <Bookkeeping /> },
+              { path: 'corporation', element: <Corporation /> },
+              { path: 'trucking', element: <Trucking /> },
             ],
           },
           {

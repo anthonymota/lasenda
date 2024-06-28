@@ -8,6 +8,7 @@ import {
   useSubmit,
 } from 'react-router-dom';
 import '../components/Client.css';
+import Bookkeeping from './Bookkeeping';
 
 export default function ClientPage() {
   const submit = useSubmit();
@@ -15,14 +16,6 @@ export default function ClientPage() {
   const client = data.event;
 
   console.log(client);
-
-  function startDeleteHandler() {
-    const proceed = window.confirm('Are you sure?');
-
-    if (proceed) {
-      submit(null, { method: 'delete' });
-    }
-  }
 
   return (
     <div className='client-page'>
@@ -53,26 +46,31 @@ export default function ClientPage() {
         </div>
       </div>
       <nav>
-        <ul className='policies'>
+        <ul className='client-header'>
+          <li>
+            <button className={({ isActive }) => (isActive ? 'active' : '')}>
+              Bookkeeping
+            </button>
+          </li>
           <li>
             <NavLink
-              to='bookkeeping'
+              to='trucking'
               className={({ isActive }) => (isActive ? 'active' : '')}
-              end
             >
-              Bookkeeping
+              Trucking
             </NavLink>
           </li>
-          <li>Corporation</li>
-          <li>Trucking</li>
+          <li>
+            <NavLink
+              to='corporation'
+              className={({ isActive }) => (isActive ? 'active' : '')}
+            >
+              Corporation
+            </NavLink>
+          </li>
         </ul>
       </nav>
-      <div className='card'>
-        <h2>Logs</h2>
-      </div>
-
-      <Link to='edit'>Edit</Link>
-      <button onClick={startDeleteHandler}>Delete</button>
+      <Bookkeeping client={client}>{client.Bookkeeping.logs}</Bookkeeping>
     </div>
   );
 }
@@ -86,17 +84,4 @@ export async function loader({ request, params }) {
   } else {
     return response;
   }
-}
-
-export async function action({ params, request }) {
-  const clientID = params.clientId;
-  console.log('clientID', clientID);
-  const response = await fetch('http://localhost:8080/events/' + clientID, {
-    method: request.method,
-  });
-
-  if (!response.ok) {
-    throw json({ message: 'Could not delete client' }, { status: 500 });
-  }
-  return redirect('/clients');
 }

@@ -1,5 +1,9 @@
 .client-header {
     display: flex;
-    justify-content: flex-end;
-    gap: 10px;
+  gap: 20px;
+  background-color: rgb(23, 73, 197);
+  color: white;
+  font-family: 'Times New Roman', Times, serif;
+  height: 50px;
+  align-items: center;
 }
