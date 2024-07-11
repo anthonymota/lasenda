@@ -1,21 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './components/App';
 import ClientPage, { loader as clientDetailLoader } from './pages/ClientPage';
-import UserProfile from './pages/UserProfile';
-import Bookkeeping from './pages/Bookkeeping';
-import Trucking from './pages/Trucking';
-import Corporation from './pages/Corporation';
 import ClientList, { loader as clientsLoader } from './pages/ClientList';
+import { action as manipulateClientAction } from './components/ClientForm';
 import ClientsRootLayout, {
   action as deleteClientAction,
 } from './pages/ClientsRootLayout';
+import UserProfile from './pages/UserProfile';
 import NewClientPage from './pages/NewClientPage';
 import EditClientPage from './pages/EditClientPage';
 import Layout from './components/Layout';
 import ErrorPage from './pages/ErrorPage';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { action as manipulateClientAction } from './components/ClientForm';
 
 const router = createBrowserRouter([
   {
@@ -49,9 +46,6 @@ const router = createBrowserRouter([
                 element: <EditClientPage />,
                 action: manipulateClientAction,
               },
-              { path: 'bookkeeping', element: <Bookkeeping /> },
-              { path: 'corporation', element: <Corporation /> },
-              { path: 'trucking', element: <Trucking /> },
             ],
           },
           {

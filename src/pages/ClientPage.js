@@ -1,21 +1,18 @@
-import {
-  useParams,
-  Link,
-  NavLink,
-  useRouteLoaderData,
-  json,
-  redirect,
-  useSubmit,
-} from 'react-router-dom';
+import { useParams, useRouteLoaderData, json } from 'react-router-dom';
 import '../components/Client.css';
-import Bookkeeping from './Bookkeeping';
+import Policy from '../components/Policy';
+import { useState } from 'react';
 
 export default function ClientPage() {
-  const submit = useSubmit();
+  const [policy, setPolicy] = useState('');
   const data = useRouteLoaderData('client-detail');
   const client = data.event;
 
   console.log(client);
+
+  function handleSelect(policy) {
+    setPolicy(policy);
+  }
 
   return (
     <div className='client-page'>
@@ -48,29 +45,35 @@ export default function ClientPage() {
       <nav>
         <ul className='client-header'>
           <li>
-            <button className={({ isActive }) => (isActive ? 'active' : '')}>
+            <button
+              onClick={(e) => {
+                handleSelect('Bookkeeping');
+              }}
+            >
               Bookkeeping
             </button>
           </li>
           <li>
-            <NavLink
-              to='trucking'
-              className={({ isActive }) => (isActive ? 'active' : '')}
+            <button
+              onClick={(e) => {
+                handleSelect('Trucking');
+              }}
             >
               Trucking
-            </NavLink>
+            </button>
           </li>
           <li>
-            <NavLink
-              to='corporation'
-              className={({ isActive }) => (isActive ? 'active' : '')}
+            <button
+              onClick={(e) => {
+                handleSelect('Corporation');
+              }}
             >
               Corporation
-            </NavLink>
+            </button>
           </li>
         </ul>
       </nav>
-      <Bookkeeping client={client}>{client.Bookkeeping.logs}</Bookkeeping>
+      <Policy client={client} policy={policy} />
     </div>
   );
 }

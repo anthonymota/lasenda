@@ -208,8 +208,9 @@
       "Fein #": "21-6879843",
       "1stPhone": "(909)811-5222",
       "1stEmail": "johnhansen@yahoo.com",
-      "IPComments": "The account is under his name",
-      "Bookkeeping":{"logs":["log","log2"]},
+      "Bookkeeping": {"logs":["book logs","log2"]},
+      "Trucking": {"logs":["trucking logs","trucking log2"]},
+      "IPComments": "The account is under his name.",
       "id": "2"
     },
     {
