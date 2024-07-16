@@ -99,6 +99,15 @@ export default function ClientForm({ client, method }) {
           defaultValue={client ? client['1stEmail'] : ''}
         />
       </p>
+      <p>
+        <label htmlFor='bookkeepinglog'>Bookkeeping Log</label>
+        <input
+          type='text'
+          name='bookkeepinglog'
+          required
+          defaultValue={client ? client['Bookkeeping']['logs'] : ''}
+        />
+      </p>
       <button disabled={isSubmitting}>
         {isSubmitting ? 'Submitting...' : 'Save'}
       </button>
@@ -119,6 +128,7 @@ export async function action({ request, params }) {
     ['1stPhone']: data.get('1st_phone'),
     ['1stEmail']: data.get('1st_email'),
     IPComments: data.get('description'),
+    Bookkeeping: {logs: data.get('bookkeepinglog')},
   };
 
   let url = 'http://localhost:8080/events';

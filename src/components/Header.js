@@ -43,6 +43,14 @@ export default function Header() {
               Profile
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to='/auth?mode=login'
+              className={({ isActive }) => (isActive ? 'active' : '')}
+            >
+              Authentication
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </header>

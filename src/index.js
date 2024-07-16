@@ -8,6 +8,7 @@ import { action as manipulateClientAction } from './components/ClientForm';
 import ClientsRootLayout, {
   action as deleteClientAction,
 } from './pages/ClientsRootLayout';
+import Authentication,{action as authAction } from './pages/Authentication';
 import UserProfile from './pages/UserProfile';
 import NewClientPage from './pages/NewClientPage';
 import EditClientPage from './pages/EditClientPage';
@@ -55,6 +56,7 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {path:'auth', element: <Authentication Page />, action:authAction},
       { path: 'profile', element: <UserProfile /> },
     ],
   },
