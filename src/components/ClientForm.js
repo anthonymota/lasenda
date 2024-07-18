@@ -5,6 +5,7 @@ import {
   json,
   redirect,
 } from 'react-router-dom';
+import { getAuthToken } from '../util/auth';
 
 export default function ClientForm({ client, method }) {
   //return server data in action
@@ -137,10 +138,12 @@ export async function action({ request, params }) {
     const clientId = params.clientId;
     url = 'http://localhost:8080/events/' + clientId;
   }
+  const token=getAuthToken()
   const response = await fetch(url, {
     method: method,
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': 'Bearer '+token,
     },
     body: JSON.stringify(clientData),
   });

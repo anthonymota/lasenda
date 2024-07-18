@@ -1,9 +1,11 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import company_image from '../images/la-senda-image.png';
+import React from "react";
+import { NavLink, Form, useRouteLoaderData } from "react-router-dom";
+import company_image from "../images/la-senda-image.png";
 export default function Header() {
+  const token = useRouteLoaderData("root");
+
   return (
-    <header className='main-header'>
+    <header className="main-header">
       <nav>
         <ul>
           <li>
@@ -11,46 +13,62 @@ export default function Header() {
           </li>
           <li>
             <NavLink
-              to='/'
-              className={({ isActive }) => (isActive ? 'active' : '')}
+              to="/"
+              className={({ isActive }) => (isActive ? "active" : "")}
               end
             >
               Home
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to='/clients'
-              className={({ isActive }) => (isActive ? 'active' : '')}
-              end
-            >
-              Clients
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to='/clients/new'
-              className={({ isActive }) => (isActive ? 'active' : '')}
-            >
-              New Client
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to='/profile'
-              className={({ isActive }) => (isActive ? 'active' : '')}
-            >
-              Profile
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to='/auth?mode=login'
-              className={({ isActive }) => (isActive ? 'active' : '')}
-            >
-              Authentication
-            </NavLink>
-          </li>
+          {token && (
+            <li>
+              <NavLink
+                to="/clients"
+                className={({ isActive }) => (isActive ? "active" : "")}
+                end
+              >
+                Clients
+              </NavLink>
+            </li>
+          )}
+          {token && (
+            <li>
+              <NavLink
+                to="/clients/new"
+                className={({ isActive }) => (isActive ? "active" : "")}
+              >
+                New Client
+              </NavLink>
+            </li>
+          )}
+          {token && (
+            <li>
+              <NavLink
+                to="/profile"
+                className={({ isActive }) => (isActive ? "active" : "")}
+              >
+                Profile
+              </NavLink>
+            </li>
+          )}
+
+          {!token && (
+            <li>
+              <NavLink
+                to="/auth?mode=login"
+                className={({ isActive }) => (isActive ? "active" : "")}
+              >
+                Authentication
+              </NavLink>
+            </li>
+          )}
+          {token && (
+            <li>
+              <Form action="/logout" method="post">
+                <button>Logout</button>
+              </Form>
+            </li>
+          )}
         </ul>
       </nav>
     </header>

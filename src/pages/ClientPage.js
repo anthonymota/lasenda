@@ -1,11 +1,16 @@
-import { useParams, useRouteLoaderData, json } from 'react-router-dom';
-import '../components/Client.css';
-import Policy from '../components/Policy';
-import { useState } from 'react';
+import {
+  useParams,
+  useRouteLoaderData,
+  json,
+  redirect,
+} from "react-router-dom";
+import "../components/Client.css";
+import Policy from "../components/Policy";
+import { useState } from "react";
 
 export default function ClientPage() {
-  const [policy, setPolicy] = useState('');
-  const data = useRouteLoaderData('client-detail');
+  const [policy, setPolicy] = useState("");
+  const data = useRouteLoaderData("client-detail");
   const client = data.event;
 
   console.log(client);
@@ -15,39 +20,39 @@ export default function ClientPage() {
   }
 
   return (
-    <div className='client-page'>
-      <ul className='top-header'>
+    <div className="client-page">
+      <ul className="top-header">
         <li>Customer ID: {client.CustID}</li>
       </ul>
-      <div className='client-page-details'>
-        <div className='left-column'>
-          <ul className='client-details'>
+      <div className="client-page-details">
+        <div className="left-column">
+          <ul className="client-details">
             <li>
-              Corporation:{' '}
-              {client['1stInsured'] !== client['Ins/Bus']
-                ? client['Ins/Bus']
+              Corporation:{" "}
+              {client["1stInsured"] !== client["Ins/Bus"]
+                ? client["Ins/Bus"]
                 : client.Business}
             </li>
-            <li>Contact 1: {' ' + client.Last + ', ' + client['First']}</li>
+            <li>Contact 1: {" " + client.Last + ", " + client["First"]}</li>
             <li>
-              Mailing Address: {client.Address + ','} {client.City}
+              Mailing Address: {client.Address + ","} {client.City}
             </li>
           </ul>
         </div>
-        <div className='right-column'>
-          <ul className='client-details'>
-            <li>Producer: {client['C-Producer']}</li>
-            <li>Cell Phone: {client['1stPhone']}</li>
-            <li>Work Email: {client['1stEmail']}</li>
+        <div className="right-column">
+          <ul className="client-details">
+            <li>Producer: {client["C-Producer"]}</li>
+            <li>Cell Phone: {client["1stPhone"]}</li>
+            <li>Work Email: {client["1stEmail"]}</li>
           </ul>
         </div>
       </div>
       <nav>
-        <ul className='client-header'>
+        <ul className="client-header">
           <li>
             <button
               onClick={(e) => {
-                handleSelect('Bookkeeping');
+                handleSelect("Bookkeeping");
               }}
             >
               Bookkeeping
@@ -56,7 +61,7 @@ export default function ClientPage() {
           <li>
             <button
               onClick={(e) => {
-                handleSelect('Trucking');
+                handleSelect("Trucking");
               }}
             >
               Trucking
@@ -65,7 +70,7 @@ export default function ClientPage() {
           <li>
             <button
               onClick={(e) => {
-                handleSelect('Corporation');
+                handleSelect("Corporation");
               }}
             >
               Corporation
@@ -80,10 +85,10 @@ export default function ClientPage() {
 
 export async function loader({ request, params }) {
   const id = params.clientId;
-  const response = await fetch('http://localhost:8080/events/' + id);
+  const response = await fetch("http://localhost:8080/events/" + id);
 
   if (!response.ok) {
-    throw json({ message: 'Could not fetch client details' }, { status: 500 });
+    throw json({ message: "Could not fetch client details" }, { status: 500 });
   } else {
     return response;
   }

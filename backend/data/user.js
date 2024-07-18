@@ -1,5 +1,6 @@
 const { v4: generateId } = require('uuid');
 const { hash } = require('bcryptjs');
+const fs=require('node:fs/promises')
 
 async function readData() {
     const data = await fs.readFile('events.json', 'utf8');
@@ -11,6 +12,7 @@ async function readData() {
   }
   
 async function add(data) {
+  console.log('hello');
     const storedData=await readData();
     const userId=generateId();
     const hashedPw= await hash(data.password,12);
@@ -18,6 +20,7 @@ async function add(data) {
         storedData.users = [];
       }
       storedData.users.push({ ...data, password: hashedPw, id: userId });
+      console.log('hey',storedData.users);
       await writeData(storedData);
       return { id: userId, email: data.email };
 }
